@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+exec docker-compose -f docker-compose.yml -f ${1:-docker-compose.dev.yml} -p dokuwiki $@

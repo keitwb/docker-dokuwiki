@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -ex
+
+sed -i -e "s/<SERVER_HOSTNAME>/${WIKI_ENV_SERVER_HOSTNAME%:*}/g" /etc/nginx/sites-enabled/*
+
+if [[ -z $1 ]]
+then
+  exec nginx
+else
+  exec $@
+fi

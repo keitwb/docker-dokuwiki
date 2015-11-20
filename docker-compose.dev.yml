@@ -1,0 +1,10 @@
+---
+nginx:
+  volumes:
+    - "./dev-ssl:/etc/nginx/ssl"
+  ports:
+    - "9443:443"
+wiki:
+  environment:
+    SERVER_HOSTNAME: wiki.dev:9443
+    INITIAL_ADMIN_PASSWORD: password
