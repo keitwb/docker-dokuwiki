@@ -1,11 +1,15 @@
 ---
-wiki:
-  build: wiki
-  volumes:
-    - wiki_data:/wiki/data
-nginx:
-  build: nginx
-  links:
-    - wiki
-  volumes_from:
-    - wiki
+version: '2'
+services:
+  wiki:
+    build: ./wiki
+    volumes:
+      - data:/wiki/data
+  nginx:
+    build: ./nginx
+    volumes_from:
+      - wiki
+    depends_on:
+      - wiki
+volumes:
+  data: {}

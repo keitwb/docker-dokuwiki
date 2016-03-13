@@ -1,15 +1,9 @@
-FROM debian:jessie
+FROM nginx:1.9.11
 
 ENTRYPOINT ["/entrypoint"]
 EXPOSE 80
-EXPOSE 443
 
-# Install prerequisites
-RUN apt-get update -q && \
-    apt-get -yq install nginx openssl vim && \
-    apt-get autoremove -yq && apt-get clean
-
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx_site.conf /etc/nginx/sites-enabled/dokuwiki
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx_site.conf /etc/nginx/conf.d/dokuwiki.conf
 
 COPY entrypoint /entrypoint

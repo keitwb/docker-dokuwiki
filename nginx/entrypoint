@@ -2,11 +2,11 @@
 
 set -ex
 
-sed -i -e "s/<SERVER_HOSTNAME>/${WIKI_ENV_SERVER_HOSTNAME%:*}/g" /etc/nginx/sites-enabled/*
+sed -i -e "s/<SERVER_HOSTNAME>/${SERVER_HOSTNAME}/g" /etc/nginx/conf.d/dokuwiki.conf
 
 if [[ -z $1 ]]
 then
-  exec nginx
+  exec nginx -g 'daemon off;'
 else
   exec $@
 fi

@@ -1,10 +1,19 @@
 ---
-nginx:
-  volumes:
-    - "./dev-ssl:/etc/nginx/ssl"
-  ports:
-    - "9443:443"
-wiki:
-  environment:
-    SERVER_HOSTNAME: wiki.dev:9443
-    INITIAL_ADMIN_PASSWORD: password
+version: '2'
+services:
+  nginx:
+    volumes:
+      - "./dev-ssl:/etc/nginx/ssl"
+    environment:
+      SERVER_HOSTNAME: wiki.dev
+  wiki:
+    environment:
+      SERVER_HOSTNAME: wiki.dev:9443
+      INITIAL_ADMIN_PASSWORD: password
+  ssl:
+    image: keitwb/ssl-dev-gateway
+    ports:
+      - "9443:443"
+    environment:
+      ORIGIN_SERVER: nginx:80
+
