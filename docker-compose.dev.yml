@@ -2,8 +2,6 @@
 version: '2'
 services:
   nginx:
-    volumes:
-      - "./dev-ssl:/etc/nginx/ssl"
     environment:
       SERVER_HOSTNAME: wiki.dev
   wiki:
